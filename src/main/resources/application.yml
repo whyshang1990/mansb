@@ -1,0 +1,4 @@
+# 配置读取的环境配置文件
+spring:
+  profiles:
+    active: dev
