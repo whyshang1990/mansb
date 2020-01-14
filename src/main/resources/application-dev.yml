@@ -1,3 +1,19 @@
 # 配置服务器启动端口
 server:
   port: 8889
+
+# debug模式配置
+#debug: true
+
+# 数据库源配置
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MariaDBDialect
+  datasource:
+    url: jdbc:mariadb://localhost:3306/why
+    username: root
+    password: wuhaiyun
+    driver-class-name: org.mariadb.jdbc.Driver
