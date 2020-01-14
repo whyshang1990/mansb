@@ -1,4 +1,4 @@
-# 配置读取的环境配置文件
+# 閰嶇疆婵�娲荤殑鐜閰嶇疆鏂囦欢
 spring:
   profiles:
     active: dev
