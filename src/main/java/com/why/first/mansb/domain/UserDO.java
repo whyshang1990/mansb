@@ -16,7 +16,7 @@ import javax.persistence.Table;
                 @Index(name="index_user_uuid", columnList = "user_uuid", unique = true)
         }
 )
-public class Users {
+public class UserDO {
     @Id // 指明ID列
     @GeneratedValue(strategy = GenerationType.IDENTITY) // @GeneratedValue： 主键标识，表明是否自动生成, 必须, strategy也是必写, 指明主键生成策略, 默认是Oracle
     @Column(name = "id")
