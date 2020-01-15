@@ -2,3 +2,7 @@
 spring:
   profiles:
     active: dev
+
+# 当属性为null时，不将其序列化
+  jackson:
+    default-property-inclusion: non_null
