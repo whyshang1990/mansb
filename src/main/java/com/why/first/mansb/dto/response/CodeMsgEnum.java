@@ -1,12 +1,14 @@
 package com.why.first.mansb.dto.response;
 
-public enum CodeMsg {
-    SUCCESS(0, "success"),
+public enum CodeMsgEnum {
+    SUCCESS(1, "Success"),
+    ERROR(0, "Unknown Inner Error"),
+
     APP_EXCEPTION(10000, "Exception Information");
     private int code;
     private String msg;
 
-    CodeMsg(int code, String msg) {
+    CodeMsgEnum(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }

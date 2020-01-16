@@ -1,8 +1,9 @@
 package com.why.first.mansb.controller;
 
+import com.why.first.mansb.constant.CommonConstant;
 import com.why.first.mansb.dto.response.BaseResponse;
-import com.why.first.mansb.dto.response.CodeMsg;
 import com.why.first.mansb.service.UserService;
+import com.why.first.mansb.utils.ResponseUtil;
 import com.why.first.mansb.vo.LogonVO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,16 +20,15 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "/create")
-    public String createUser() {
-        LogonVO logonVO = new LogonVO();
-        logonVO.setUsername("username");
-        return "create user";
+    public BaseResponse<String> createUser(@RequestBody LogonVO logonVO) {
+        this.userService.create(logonVO);
+        return ResponseUtil.success(CommonConstant.NULL);
     }
 
     @PostMapping(value = "/login")
     public BaseResponse<Boolean> loginIn(@RequestBody LogonVO logonVO) {
         Boolean isAllow = this.userService.isAllowLogin(logonVO);
-        return new BaseResponse<>(CodeMsg.SUCCESS, isAllow);
+        return ResponseUtil.success(isAllow);
     }
 
     @GetMapping(value = "/err")

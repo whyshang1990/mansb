@@ -15,7 +15,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean isAllowLogin(LogonVO logonVO) {
-        UserDO user = userDao.findByName(logonVO.getUsername());
+        UserDO user = this.userDao.findByName(logonVO.getUsername());
         return logonVO.getUsername().equals(user.getCertificate());
+    }
+
+    @Override
+    public void create(LogonVO logonVO) {
+        UserDO userDO = new UserDO();
+        userDO.setName(logonVO.getUsername());
+        userDO.setCertificate(logonVO.getPassword());
+        this.userDao.save(userDO);
     }
 }

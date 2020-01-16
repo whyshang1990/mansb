@@ -15,14 +15,12 @@ public class BaseResponse<T> {
         this(code, msg, null);
     }
 
-    public BaseResponse(CodeMsg codeMsg, T data) {
-        this.code = codeMsg.getCode();
-        this.msg = codeMsg.getMsg();
-        this.data = data;
+    public BaseResponse(CodeMsgEnum codeMsgEnum, T data) {
+        this(codeMsgEnum.getCode(), codeMsgEnum.getMsg(), data);
     }
 
-    public BaseResponse(CodeMsg codeMsg) {
-        this(codeMsg, null);
+    public BaseResponse(CodeMsgEnum codeMsgEnum) {
+        this(codeMsgEnum, null);
     }
 
     public int getCode() {
