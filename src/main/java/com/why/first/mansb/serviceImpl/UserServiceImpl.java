@@ -7,6 +7,7 @@ import com.why.first.mansb.vo.LogonVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,15 +16,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean isAllowLogin(LogonVO logonVO) {
-        UserDO user = this.userDao.findByName(logonVO.getUsername());
-        return logonVO.getUsername().equals(user.getCertificate());
+        UserDO user = this.userDao.findByName(logonVO.getUserName());
+        return logonVO.getUserName().equals(user.getCertificate());
     }
 
     @Override
     public void create(LogonVO logonVO) {
         UserDO userDO = new UserDO();
-        userDO.setName(logonVO.getUsername());
+        userDO.setName(logonVO.getUserName());
         userDO.setCertificate(logonVO.getPassword());
+        userDO.setUserUUID(UUID.randomUUID().toString());
         this.userDao.save(userDO);
     }
 }

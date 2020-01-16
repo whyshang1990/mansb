@@ -3,7 +3,7 @@ server:
   port: 8889
 
 # debug模式配置
-#debug: true
+debug: true
 
 # 数据库源配置
 spring:
