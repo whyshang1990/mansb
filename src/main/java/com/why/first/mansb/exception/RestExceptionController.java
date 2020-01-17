@@ -16,7 +16,7 @@ public class RestExceptionController {
     @ExceptionHandler(AppRuntimeException.class)
     @ResponseBody
     public final BaseResponse<String> handleAppExceptions(AppRuntimeException ex) {
-        LOGGER.error(ex.getMessage());
+        LOGGER.error(ex.getCodeMsg().getMsg());
         return ResponseUtil.exception(ex);
     }
 
