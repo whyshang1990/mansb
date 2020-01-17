@@ -10,7 +10,11 @@ public class ResponseUtil {
         return new BaseResponse<>(CodeMsgEnum.SUCCESS, data);
     }
 
-    public static BaseResponse<String> innerError() {
+    public static BaseResponse<Object> success() {
+        return success(CommonConstant.NULL);
+    }
+
+    public static BaseResponse<Object> innerError() {
         return new BaseResponse<>(CodeMsgEnum.ERROR, CommonConstant.NULL);
     }
 
