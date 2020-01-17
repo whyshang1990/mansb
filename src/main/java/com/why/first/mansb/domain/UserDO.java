@@ -23,8 +23,8 @@ public class UserDO {
     private Integer id;
     @Column(name = "user_uuid", nullable = false, length = 64)
     private String userUUID;
-    @Column(name = "name", nullable = false, length = 40)
-    private String name;
+    @Column(name = "username", nullable = false, length = 40)
+    private String username;
     @Column(name = "certificate", nullable = false, length = 40)
     private String certificate;
 
@@ -44,12 +44,12 @@ public class UserDO {
         this.userUUID = userUUID;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getCertificate() {

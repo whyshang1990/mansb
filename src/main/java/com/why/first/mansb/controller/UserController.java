@@ -31,9 +31,12 @@ public class UserController {
     }
 
     @PostMapping(value = "/login")
-    public BaseResponse<Boolean> loginIn(@RequestBody LogonVO logonVO) {
-        Boolean isAllow = this.userService.isAllowLogin(logonVO);
-        return ResponseUtil.success(isAllow);
+    public BaseResponse<Object> loginIn(@RequestBody LogonVO logonVO){
+        if (this.userService.isAllowLogin(logonVO)) {
+            return ResponseUtil.success();
+        } else {
+            return ResponseUtil.innerError();
+        }
     }
 
     @GetMapping(value = "/err")
