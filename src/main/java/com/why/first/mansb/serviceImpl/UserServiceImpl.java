@@ -6,6 +6,7 @@ import com.why.first.mansb.exception.AppRuntimeException;
 import com.why.first.mansb.repository.UserDao;
 import com.why.first.mansb.service.UserService;
 import com.why.first.mansb.utils.JsonUtil;
+import com.why.first.mansb.utils.UuidUtil;
 import com.why.first.mansb.vo.LogonVO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class UserServiceImpl implements UserService {
         UserDO userDO = new UserDO();
         userDO.setUsername(logonVO.getUsername());
         userDO.setCertificate(logonVO.getPassword());
-        userDO.setUserUUID(UUID.randomUUID().toString());
+        userDO.setUserUUID(UuidUtil.genUuid());
         this.userDao.save(userDO);
     }
 }
