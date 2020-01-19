@@ -1,16 +1,22 @@
 package com.why.first.mansb.dto;
 
-import java.util.List;
-import java.util.Map;
-
 public class CategoryDTO {
-    private Map<String, List<String>> categoryDetail;
+    private String uuid;
+    private String name;
 
-    public Map<String, List<String>> getCategoryDetail() {
-        return categoryDetail;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setCategoryDetail(Map<String, List<String>> categoryDetail) {
-        this.categoryDetail = categoryDetail;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
