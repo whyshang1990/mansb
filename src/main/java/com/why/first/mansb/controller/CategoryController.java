@@ -1,7 +1,6 @@
 package com.why.first.mansb.controller;
 
 import com.why.first.mansb.dto.response.BaseResponse;
-import com.why.first.mansb.dto.CategoryDTO;
 import com.why.first.mansb.service.CategoryService;
 import com.why.first.mansb.utils.ResponseUtil;
 import com.why.first.mansb.vo.CategoryVO;
@@ -15,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/v1/category")
 public class CategoryController {
     private static Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
 
