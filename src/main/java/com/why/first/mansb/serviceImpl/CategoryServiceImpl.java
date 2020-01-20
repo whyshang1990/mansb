@@ -2,17 +2,21 @@ package com.why.first.mansb.serviceImpl;
 
 import com.why.first.mansb.domain.CategoryDO;
 import com.why.first.mansb.dto.CategoryDTO;
-import com.why.first.mansb.dto.factory.CategoryDTOFactory;
+import com.why.first.mansb.dto.SubCategoryDTO;
 import com.why.first.mansb.repository.CategoryDao;
 import com.why.first.mansb.service.CategoryService;
+import com.why.first.mansb.utils.JsonUtil;
 import com.why.first.mansb.vo.CategoryVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -22,23 +26,31 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryDao categoryDao;
 
     @Override
-    public List<CategoryVO> getCategories() {
-        List<CategoryVO> result = new ArrayList<>();
+    public CategoryVO getTopCategories() {
+        CategoryVO result = new CategoryVO();
+        List<CategoryDTO> tops = this.categoryDao.getTops();
+        List<SubCategoryDTO> subs = this.categoryDao.getSubs();
 
+        LOGGER.info("tops: {}", JsonUtil.toJson(tops));
+        LOGGER.info("subs: {}", JsonUtil.toJson(subs));
+        result.setTopCategories(tops);
 
-        List<CategoryDO> majorCategories = this.categoryDao.findByLevel(0);
+        Map<String, List<CategoryDTO>> subMap = new HashMap<>();
+        for (SubCategoryDTO sub : subs) {
+            CategoryDTO child = sub.getCategoryDTO();
+            List<CategoryDTO> list;
+            if (CollectionUtils.isEmpty(subMap.get(sub.getTopUuid()))) {
+                list = new ArrayList<>();
+                list.add(child);
+            } else {
+                list = subMap.get(sub.getTopUuid());
+                list.add(sub.getCategoryDTO());
+            }
 
-
-        for (CategoryDO majorCategory : majorCategories) {
-            CategoryVO categoryVO = new CategoryVO();
-            CategoryDTO categoryDTO = CategoryDTOFactory.getByDO(majorCategory);
-            categoryVO.setMajorCategory(categoryDTO);
-            List<CategoryDO> minorCategories = this.categoryDao.findMinors(1, categoryDTO.getUuid());
-            List<CategoryDTO> categoryDTOs = CategoryDTOFactory.getByDOs(minorCategories);
-            categoryVO.setMinorCategories(categoryDTOs);
-            result.add(categoryVO);
+            subMap.put(sub.getTopUuid(), list);
         }
 
+        result.setSubCategories(subMap);
         return result;
     }
 }

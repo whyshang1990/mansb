@@ -21,9 +21,9 @@ public class CategoryController {
     @Resource
     private CategoryService categoryService;
 
-    @GetMapping("/all")
-    public BaseResponse<List<CategoryVO>> getAllCategory() {
-        List<CategoryVO> categoryVOs = this.categoryService.getCategories();
+    @GetMapping("/top")
+    public BaseResponse<CategoryVO> getTopCategories() {
+        CategoryVO categoryVOs = this.categoryService.getTopCategories();
         return ResponseUtil.success(categoryVOs);
     }
 }

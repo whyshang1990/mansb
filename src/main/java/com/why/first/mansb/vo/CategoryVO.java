@@ -1,30 +1,27 @@
 package com.why.first.mansb.vo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.why.first.mansb.dto.CategoryDTO;
 
 import java.util.List;
+import java.util.Map;
 
 public class CategoryVO {
-    @JsonUnwrapped
-    private CategoryDTO majorCategory;
-    @JsonProperty("children")
-    private List<CategoryDTO> minorCategories;
+    private List<CategoryDTO> topCategories;
+    private Map<String, List<CategoryDTO>> subCategories;
 
-    public CategoryDTO getMajorCategory() {
-        return majorCategory;
+    public List<CategoryDTO> getTopCategories() {
+        return topCategories;
     }
 
-    public void setMajorCategory(CategoryDTO majorCategory) {
-        this.majorCategory = majorCategory;
+    public void setTopCategories(List<CategoryDTO> topCategories) {
+        this.topCategories = topCategories;
     }
 
-    public List<CategoryDTO> getMinorCategories() {
-        return minorCategories;
+    public Map<String, List<CategoryDTO>> getSubCategories() {
+        return subCategories;
     }
 
-    public void setMinorCategories(List<CategoryDTO> minorCategories) {
-        this.minorCategories = minorCategories;
+    public void setSubCategories(Map<String, List<CategoryDTO>> subCategories) {
+        this.subCategories = subCategories;
     }
 }

@@ -4,6 +4,11 @@ public class CategoryDTO {
     private String uuid;
     private String name;
 
+    public CategoryDTO(String uuid, String name) {
+        this.uuid = uuid;
+        this.name = name;
+    }
+
     public String getUuid() {
         return uuid;
     }
