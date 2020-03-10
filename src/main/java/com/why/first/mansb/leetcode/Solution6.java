@@ -1,48 +1,46 @@
 package com.why.first.mansb.leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Solution6 {
     /**
-     * numRows * 2 - 1
-     * 思路：col, row(个字符一个循环)
+     * 每一行使用StringBuilder 存储字符
+     * 将输入字符串中的字符放到对应的StringBuilderzhong
+     * 遍历所有StringBuilder获取结果字符串
      */
     public String convert(String s, int numRows) {
         if (numRows == 1) {
             return s;
         }
-        int cols = s.length() / 2;
-        char[][] array = new char[numRows][cols];
-        int index = 0, row = 0, col = 0;
-        while (index < s.length()) {
-            while (row < numRows) {
-                array[row++][col] = s.charAt(index++);
-                if (index >= s.length()) {
-                    break;
-                }
-            }
-            if (index >= s.length()) {
-                break;
-            }
-            row--;
-            while (row > 0) {
-                array[--row][++col] = s.charAt(index++);
-                if (index >= s.length()) {
-                    break;
-                }
-            }
-            row++;
+        List<StringBuilder> rows = new ArrayList<>();
+        for (int i = 0; i < Math.min(s.length(), numRows); i++) {
+            rows.add(new StringBuilder());
         }
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < numRows; i++) {
-            // System.out.println(String.valueOf(array[i]));
-            sb.append(String.valueOf(array[i]));
+
+        int row = 0;
+        boolean isAdd = false;
+        for (char c : s.toCharArray()) {
+            rows.get(row).append(c);
+            if (row == 0 || row == numRows - 1) {
+                isAdd = !isAdd;
+            }
+            if (isAdd) {
+                row += 1;
+            } else {
+                row -= 1;
+            }
         }
-        return sb.toString().replaceAll("\u0000", "");
+
+        StringBuilder ret = new StringBuilder();
+        for (StringBuilder sb : rows) ret.append(sb);
+        return ret.toString();
     }
 
     public static void main(String[] args) {
-        String s = "AA";
+        String s = "LEETCODEISHIRING";
         Solution6 solution = new Solution6();
-        String r = solution.convert(s, 2);
+        String r = solution.convert(s, 3);
         System.out.println(r);
     }
 }
